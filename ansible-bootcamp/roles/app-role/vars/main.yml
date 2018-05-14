@@ -1,0 +1,2 @@
+appserver:  tomcat
+webroot:   /usr/share/tomcat/webapps/ROOT

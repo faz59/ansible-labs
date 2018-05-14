@@ -1,0 +1,26 @@
+---
+# tasks file for app-role
+- name: install {{ appserver }}
+  yum:
+    name: {{ appserver }}
+    state: latest
+
+- name: enable tomcat at webroot
+  service:
+    name: {{ appserver }}
+
+-name: tomcat web webroot
+ file:
+   path: "{{ webroot }}"
+   state: directory
+
+-name: setup index.html
+ templates:
+   src: index.html.j2
+   dest: "{{webroot}}"
+   mode: 0644
+
+- name: restart appserver
+  service:
+    name: "{{appserver}}"
+    state: restarted
